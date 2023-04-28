@@ -1,0 +1,30 @@
+#not complete yet
+
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as mpl
+
+house_data=pd.read_csv('house_data.csv')
+house_data.tail()
+
+balcony_median=house_data['balcony'].mean()
+house_data['balcony'].fillna(balcony_median,inplace=True)
+house_data['society'].fillna('Mahla T',inplace=True)
+
+for x in house_data.index:
+    if house_data.loc[x,"size"] == "1 Bedroom":
+        house_data.loc[x,"size"] = "1 BHK"
+for y in house_data.index:
+     if house_data.loc[y,"size"] == "1 RK":
+        house_data.loc[y,"size"] = "1 BHK"
+for z in house_data.index:
+    if house_data.loc[z,"size"] == "8 Bedroom":
+        house_data.loc[z,"size"] = "8 BHK"
+for a in house_data.index:
+    if house_data.loc[a,"size"] == "7 Bedroom":
+        house_data.loc[a,"size"] = "7 BHK"
+
+house_data.loc[13265,"total_sqft"] = 1180
+house_data.loc[13299,"total_sqft"]=1250
+
+house_data.tail(60)
