@@ -1,0 +1,25 @@
+!pip install scikit-learn 
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+import joblib 
+import pandas as pd
+
+music_data=pd.read_csv('music.csv')
+music_data
+
+X=music_data.drop(columns=['genre'])
+y=music_data['genre']
+
+model=DecisionTreeClassifier()
+model.fit(X.values,y)
+prediction=model.predict([[19,1],[19,0]])
+prediction
+
+#PERSISTING MODEL
+joblib.dump(model,'music-reccomender.joblib')
+
+#TO VISUALIZE THE MODEL
+tree.export_graphviz(model,out_file='musc-reccomender.dot',feature_names=['age','gender'],class_names=sorted(y.unique())
+                     ,label='all',rounded=True,filled=True)
